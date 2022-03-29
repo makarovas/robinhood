@@ -1,0 +1,16 @@
+.app__wrapper {
+  margin: 0 auto;
+  padding: 48px;
+}
+
+a {
+  all: unset;
+}
+
+* {
+  color: #fff;
+}
+
+.main__wrapper {
+  display: flex;
+}
