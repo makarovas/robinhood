@@ -1,5 +1,7 @@
 import React from "react";
 import "./Chart.css";
+import LineGraph from "./LineGraph";
+
 const Chart = ({
   value = "20000,2",
   changesTotal = "15000.2",
@@ -8,7 +10,7 @@ const Chart = ({
   sign = "-",
 }) => {
   return (
-    <div className="chart">
+    <div className="chart_wrapper">
       <div className="portfolio">
         <div className="portfolio__value">${value}</div>
         <div className="changes">
@@ -18,6 +20,9 @@ const Chart = ({
           </div>
           <div className="dayType">{dayType}</div>
         </div>
+      </div>
+      <div className="graph">
+        <LineGraph />
       </div>
     </div>
   );

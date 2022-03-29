@@ -20,6 +20,6 @@ a {
   flex: 30%;
 }
 
-.chart {
+.chart_wrapper {
   flex: 65%;
 }
