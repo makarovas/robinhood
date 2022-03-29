@@ -1,0 +1,17 @@
+.changes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 10px;
+  width: 150px;
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio__value {
+  margin-bottom: 10px;
+  font-size: 20px;
+}

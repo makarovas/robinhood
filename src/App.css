@@ -13,4 +13,13 @@ a {
 
 .main__wrapper {
   display: flex;
+  height: 500px;
+}
+
+.stocks {
+  flex: 30%;
+}
+
+.chart {
+  flex: 65%;
 }
