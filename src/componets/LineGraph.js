@@ -1,110 +1,95 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-// import { Utils } from "../heplers";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const data = [
-  { x: 10, y: 20 },
-  { x: 104, y: 40 },
-  { x: 200, y: 180 },
-];
-
-const createMockData = () => {
-  let data = [];
-  let value = 50;
-  for (let i = 0; i < 365; i++) {
-    let date = new Date();
-    date.setHours(0, 0, 0, 0);
-    date.setDate(i);
-    value += Math.round((Math.random() < 0.5 ? 1 : 0) * Math.random * 10);
-    console.log(date, value);
-    data.push({ x: date, y: Number(value) });
-  }
-  return data;
+const options = {
+  legend: {
+    display: false,
+  },
+  hover: {
+    intersect: false,
+  },
+  elements: {
+    line: {
+      tension: 0,
+    },
+    point: {
+      radius: 0,
+    },
+  },
+  maintainAspectRatio: false,
+  tooltips: {
+    mode: "index",
+    intersect: false,
+    callbacks: {},
+  },
+  scales: {
+    xAxes: [
+      {
+        type: "time",
+        time: {
+          format: "MM/DD/YY",
+          tooltipFormat: "ll",
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    ],
+    yAxes: [
+      {
+        gridLines: {
+          display: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    ],
+  },
 };
 
-// const options
-const LineGraph = () => {
-  const [graphData, setGraphData] = useState([]);
+function LineGraph({ casesType }) {
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    setGraphData(createMockData);
+    let data = [];
+    let value = 50;
+    for (var i = 0; i < 366; i++) {
+      let date = new Date();
+      date.setHours(0, 0, 0, 0);
+      date.setDate(i);
+      value += Math.round((Math.random() < 0.5 ? 1 : 0) * Math.random() * 10);
+      data.push({ x: date, y: value });
+    }
+    setData(data);
   }, []);
 
   return (
-    <div className="linegraph">
-      <Line
-        data={{
-          position: "top",
-          labels: ["jan", "feb", "mart", "apr", "may", "jul"],
-          datasets: [
-            {
-              type: "line",
-              data: data,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)",
-              ],
-              borderWidth: 1,
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            yAxes: [
+    <div>
+      {data?.length > 0 && (
+        <Line
+          data={{
+            datasets: [
               {
-                ticks: {
-                  display: false,
-                },
+                type: "line",
+                backgroundColor: "black",
+                borderColor: "#5AC53B",
+                borderWidth: 2,
+                pointBorderColor: "rgba(0, 0, 0, 0)",
+                pointBackgroundColor: "rgba(0, 0, 0, 0)",
+                pointHoverBackgroundColor: "#5AC53B",
+                pointHoverBorderColor: "#000000",
+                pointHoverBorderWidth: 4,
+                pointHoverRadius: 6,
+                data: data,
               },
             ],
-          },
-          // options: {
-          //   responsive: true,
-          //   plugins: {
-          //     tooltips: {
-          //       mode: "index",
-          //     },
-          //     legend: {
-          //       display: false,
-          //     },
-          //   },
-          // },
-        }}
-      />
+          }}
+          options={options}
+        />
+      )}
     </div>
   );
-};
+}
 
 export default LineGraph;
