@@ -9,6 +9,8 @@ a {
 
 * {
   color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 .main__wrapper {
@@ -17,9 +19,10 @@ a {
 }
 
 .stocks {
-  flex: 30%;
+  flex: 40%;
+  margin-left: 20px;
 }
 
 .chart_wrapper {
-  flex: 65%;
+  flex: 50%;
 }
