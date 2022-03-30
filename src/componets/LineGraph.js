@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 // import { Utils } from "../heplers";
 import {
@@ -11,7 +11,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-// import { Chart } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -25,17 +24,38 @@ ChartJS.register(
 
 const data = [
   { x: 10, y: 20 },
-  { x: 204, y: 40 },
+  { x: 104, y: 40 },
+  { x: 200, y: 180 },
 ];
+
+const createMockData = () => {
+  let data = [];
+  let value = 50;
+  for (let i = 0; i < 365; i++) {
+    let date = new Date();
+    date.setHours(0, 0, 0, 0);
+    date.setDate(i);
+    value += Math.round((Math.random() < 0.5 ? 1 : 0) * Math.random * 10);
+    console.log(date, value);
+    data.push({ x: date, y: Number(value) });
+  }
+  return data;
+};
 
 // const options
 const LineGraph = () => {
+  const [graphData, setGraphData] = useState([]);
+
+  useEffect(() => {
+    setGraphData(createMockData);
+  }, []);
+
   return (
     <div className="linegraph">
-      <span>Graph</span>
       <Line
         data={{
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          position: "top",
+          labels: ["jan", "feb", "mart", "apr", "may", "jul"],
           datasets: [
             {
               type: "line",
@@ -61,18 +81,26 @@ const LineGraph = () => {
           ],
         }}
         options={{
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  display: false,
+                },
               },
-              title: {
-                display: true,
-                text: "Chart.js Line Chart",
-              },
-            },
+            ],
           },
+          // options: {
+          //   responsive: true,
+          //   plugins: {
+          //     tooltips: {
+          //       mode: "index",
+          //     },
+          //     legend: {
+          //       display: false,
+          //     },
+          //   },
+          // },
         }}
       />
     </div>
