@@ -1,19 +1,20 @@
 import "./App.css";
-import Header from "./componets/Header";
-import Chart from "./componets/Chart";
-import Stocks from "./componets/Stocks";
+import Header from "./Header";
+import NewsFeed from "./Newsfeed";
+import Stats from "./Stats";
 
 function App() {
   return (
-    <div className="app__wrapper">
+    <div className="app">
       <div className="app__header">
         <Header />
-        <div className="main__wrapper">
-          <Chart />
-          <Stocks />
+      </div>
+      <div className="app__body">
+        <div className="app__container">
+          <NewsFeed />
+          <Stats />
         </div>
       </div>
-      <div className="app_body"></div>
     </div>
   );
 }
